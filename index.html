@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Treatment Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png" type="image/x-icon">
+</head>
+<body>
+
+    <div class="Menubar">
+        <div class="menubar_options">
+            <button class="menubar_options_button" id="menubar_treatWater">Treat Water</button>
+            <button class="menubar_options_button" id="menubar_calculateParameters">Calculate Parameters</button>
+            <button class="menubar_options_button" id="menubar_learnmore">Learn more</button>
+        </div>
+        <div class="menubar_heading_button">
+            <button class="menubar_heading">Water Treatment</button>
+        </div>
+    </div>
+
+    <div class="Main_Container">
+        <div id="app_message" role="alert" aria-live="polite"></div>
+        
+        <div id="div_treatWater" style="width: 100%;">
+            
+            <p class="treatWater_content_description">
+                Enter the initial water quality parameters to quickly analyze the water and determine the most suitable treatment process. Get recommended treatment methods based on your input parameters to achieve the desired water quality.
+            </p>
+            <div class="div_treatWater_heading" style="text-align: center">
+                <button class="treat_water_button" id="treat_water_button">Treat Water</button>
+            </div>
+
+            <div class="form-section" id="input_parameter_list_and_use">
+                <h4>Enter Input Parameters</h4>
+                <div class="form-group">
+                    <label for="water_turbidity_input">Turbidity (NTU):</label>
+                    <input type="number" id="water_turbidity_input" value="10" min="0" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="water_hardness_input">Hardness (mg/L as CaCO₃):</label>
+                    <input type="number" id="water_hardness_input" value="60" min="0" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="water_tds_input">Total Dissolved Solids (TDS, mg/L):</label>
+                    <input type="number" id="water_tds_input" value="150" min="0" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="water_ph_input">Initial PH of Water:</label>
+                    <input type="number" id="water_ph_input" value="7" min="0" max ="14" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="water_temperature_input">Intial Temperature of Water(°C) </label>
+                    <input type="number" id="water_temperature_input" value="25" min="-273" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="water_chlorine_input">Chlorine (qualitative):</label>
+                    <select id="water_chlorine_input">
+                        <option value="absent">Absent</option>
+                        <option value="present">Present</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="water_heavyMetals_input">Heavy metals (qualitative):</label>
+                    <select id="water_heavyMetals_input">
+                        <option value="traces">Traces</option>
+                        <option value="present">Present</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="water_chemicalPolutant_input">Chemical pollutants (qualitative):</label>
+                    <select id="water_chemicalPolutant_input">
+                        <option value="absent">Absent</option>
+                        <option value="present">Present</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="water_biologicalContaminents_input">Biological contaminants (qualitative):</label>
+                    <select id="water_biologicalContaminents_input">
+                        <option value="absent">Absent</option>
+                        <option value="present">Present</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="water_envirnmental_finish_input">Environmental finish (DO/BOD category):</label>
+                    <select id="water_envirnmental_finish_input">
+                        <option value="1">High DO / High BOD</option>
+                        <option value="2">High DO / Low BOD</option>
+                        <option value="3">Low DO / High BOD</option>
+                        <option value="4">Low DO / Low BOD</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section" id="output_parameter_list_and_use">
+                <h4>Water Application & Target Limits</h4>
+                <div class="form-group">
+                    <label for="water_application_input">Select Target Application:</label>
+                    <select id="water_application_input">
+                        <optgroup label="Agricultural & Irrigation">
+                            <option value="Overhead Sprinkler">Overhead Sprinkler</option>
+                            <option value="Drip / Micro-Irrigation">Drip / Micro-Irrigation</option>
+                            <option value="Hydroponics (Greens)">Hydroponics (Greens)</option>
+                            <option value="Flood / Furrow">Flood / Furrow</option>
+                            <option value="Greenhouse Floriculture">Greenhouse Floriculture</option>
+                        </optgroup>
+                        <optgroup label="Industrial Boiler Systems">
+                            <option value="Low Pressure Boiler (&lt; 150 psi)">Low Pressure Boiler (&lt; 150 psi)</option>
+                            <option value="Medium Pressure Boiler (150-600 psi)">Medium Pressure Boiler (150-600 psi)</option>
+                            <option value="High Pressure/Utility Boiler (&gt; 600 psi)">High Pressure/Utility Boiler (&gt; 600 psi)</option>
+                            <option value="Once-Through Boiler Systems">Once-Through Boiler Systems</option>
+                        </optgroup>
+                        <optgroup label="Industrial Cooling Systems">
+                            <option value="Once-Through Cooling">Once-Through Cooling</option>
+                            <option value="Open Cooling Towers">Open Cooling Towers</option>
+                            <option value="Closed Loop Chilled Cooling">Closed Loop Chilled Cooling</option>
+                            <option value="Data Center Evaporative Cooling">Data Center Evaporative Cooling</option>
+                        </optgroup>
+                        <optgroup label="Advanced Aquaculture">
+                            <option value="Cold Freshwater Aquaculture">Cold Freshwater Aquaculture</option>
+                            <option value="Warm Freshwater Aquaculture">Warm Freshwater Aquaculture</option>
+                            <option value="Marine Shrimp Aquaculture">Marine Shrimp Aquaculture</option>
+                            <option value="Coral Reef Systems">Coral Reef Systems</option>
+                        </optgroup>
+                        <option value="Custom">Custom Target Config</option>
+                    </select>
+                </div>
+
+                <div id="custom_output_parameter_list_and_use" style="display: none; border-top: 1px dotted #ccc; padding-top: 10px; margin-top: 10px;">
+                    <h5>Configure Custom Limits (Min / Max)</h5>
+                    <div class="form-group">
+                        <label>Turbidity target range (NTU):</label>
+                        <div class="custom-range">
+                            <input type="number" id="water_turbidity_output_l" placeholder="Min" value="0" min="0" step="any" required>
+                            <input type="number" id="water_turbidity_output_h" placeholder="Max" value="5" min="0" step="any" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Hardness target range (mg/L as CaCO₃):</label>
+                        <div class="custom-range">
+                            <input type="number" id="water_hardness_output_l" placeholder="Min" value="0" min="0" step="any" required>
+                            <input type="number" id="water_hardness_output_h" placeholder="Max" value="100" min="0" step="any" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>TDS target range (mg/L):</label>
+                        <div class="custom-range">
+                            <input type="number" id="water_tds_output_l" placeholder="Min" value="0" min="0" step="any" required>
+                            <input type="number" id="water_tds_output_h" placeholder="Max" value="500" min="0" step="any" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>pH Target Range:</label>
+                        <div class="custom-range">
+                            <input type="number" step="0.1" id="water_ph_output_l" placeholder="Min" value="6.5" min="0" max="14" required>
+                            <input type="number" step="0.1" id="water_ph_output_h" placeholder="Max" value="8.5" min="0" max="14" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Temperature target range (°C):</label>
+                        <div class="custom-range">
+                            <input type="number" id="water_temperature_output_l" placeholder="Min" value="15" min="0" step="any" required>
+                            <input type="number" id="water_temperature_output_h" placeholder="Max" value="25" min="0" step="any" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="water_envirnmental_finish_output">Environmental finish mode (DO/BOD category):</label>
+                        <select id="water_envirnmental_finish_output">
+                            <option value="1">High DO / High BOD</option>
+                            <option value="2">High DO / Low BOD</option>
+                            <option value="3">Low DO / High BOD</option>
+                            <option value="4">Low DO / Low BOD</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit_input_output_parameters" id="submit_input_output_parameters">
+                <button type="button" id="submit_input_output_parameters_form" class="menubar_options_button" style="width: 100%; margin:0;">
+                    Process Treatment Recommendation
+                </button>
+            </div>
+
+            <div class="results-box" id="results_display_box">
+                <h3>Suggested Treatment Steps (screening estimate):</h3>
+                <ul class="results-list" id="results_list_items"></ul>
+                <button type="submit" id="show_approxiate_cost" class="treat_water_button">Approximate Cost</button>
+                <div id="inputVolForAmount"><br>
+                    <label>Enter volume of water (1000L to 500000L)</label>
+                    <input type="number" placeholder="Enter volume" id="volume_for_cost"><br><br>
+                    <button type="submit" id="calc_approxiate_cost" class="treat_water_button">Calculate Cost</button><br><br>   
+                    <div id="inputVolForAmounttable"></div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="div_calculateParameters" style="display: none; width: 100%;">
+            
+            <h3>Parameter Calculations Panel</h3>
+            <p>Advanced formula tools and evaluation constants interface.</p>
+            <button type="submit" id="turbidity_calculator" class="calculator">Calculate Turbidity</button>
+            <button type="submit" id="tds_calculator" class="calculator">Calculate TDS</button>
+            <button type="submit" id="hardness_calculator" class="calculator">Calculate Hardness</button>
+            <button type="submit" id="ph_calculator" class="calculator">Calculate pH</button>
+            
+            <div id="div_hardness_calculator" class="calculator_window"> 
+                <h4 class="calculator_title">Hardness Calculator</h4>
+                <label>Enter number of salts in solution</label><input type="number" placeholder="Enter number of salts" id="hardness_calc_no_salts" class="hardness_calc_no_salts"><br><br>
+                <div id="div_hardness_calculator_multiple_salt_input"></div>
+            </div>
+            
+            <div id="div_tds_calculator" class="calculator_window">
+                <h4 class="calculator_title">TDS Calculator</h4>
+                <label>Enter conductivity of solution (µS/cm)</label>
+                <input type="number" min="0" step="any" placeholder="Enter solution conductivity" id="tds_calc_conductivity"><br>
+                <label>TDS conversion factor (dimensionless)</label>
+                <select id="tds_calc_custom_factor_type">
+                    <option value="none">Calculate by...</option>
+                    <option value="approximate">Approximate Custom Factor directly</option>
+                    <option value="calculate">Calculate using individual salts</option>
+                </select>
+                <div id="tds_calculator_display"></div>
+            </div>
+            
+            <div id="div_turbidity_calculator" class="calculator_window">
+                <h4 class="calculator_title">Turbidity Calculator</h4>
+                <label>Instrument calibration constant (NTU)</label><input type="number" min="0" step="any" placeholder="Instrument calibration" id="turbidity_calc_constant"><br>
+                <label>Initial incident light intensity (same units as scattered intensity)</label><input type="number" min="0" step="any" placeholder="Instrument calibration" id="turbidity_calc_intensity"><br>
+                <label>Light intensity scattered at 90° (same units as incident intensity)</label><input type="number" min="0" step="any" placeholder="Instrument calibration" id="turbidity_calc_scattered"><br><br>
+                <input type="submit" id="calculate_turbidity" value="Calculate Turbidity"><br>
+                <label id="turbidity_calc_output"></label>
+            </div>
+            
+            <div id="div_ph_calculator" class="calculator_window"> 
+                <h4 class="calculator_title">pH Calculator</h4>
+                <label>Enter hydrogen / hydronium ion concentration (mol/L)</label>
+                <input type="number" min="0" step="any" id="ph_calc_conc" placeholder="Enter concentration"><br><br>
+                <input type="submit" id="calculate_ph" value="Calculate pH"><br>
+                <label id="ph_calc_output"></label>
+            </div>
+            
+        </div>
+
+        <div id="div_learnmore" style="display: none; width: 100%;">
+            <h3>Learn More: Water Quality & Treatment</h3>
+            <p class="learn-intro">This section explains the water-quality parameters used by the analyzer, why they matter, and the treatment methods that appear in its recommendations. Use it as a project reference while entering values and interpreting the results.</p>
+
+            <h4 class="learn-section-title">1. Water-quality parameters</h4>
+            <div class="learn-grid">
+                <article class="learn-card">
+                    <h4>Turbidity</h4>
+                    <p><b>Unit:</b> NTU (nephelometric turbidity units)</p>
+                    <p>Turbidity describes how cloudy water appears because suspended particles scatter light. It can be caused by silt, clay, organic matter and other fine particles.</p>
+                    <p><b>Why it matters:</b> High turbidity can interfere with disinfection and may indicate that clarification or filtration is needed.</p>
+                </article>
+                <article class="learn-card">
+                    <h4>Hardness</h4>
+                    <p><b>Unit:</b> mg/L as CaCO₃</p>
+                    <p>Hardness is mainly associated with dissolved calcium and magnesium ions. It is commonly reported as an equivalent concentration of calcium carbonate.</p>
+                    <p><b>Why it matters:</b> Hard water can form scale in pipes, heaters and boilers. Some applications require lower hardness, while others may need minerals to remain present.</p>
+                </article>
+                <article class="learn-card">
+                    <h4>Total Dissolved Solids (TDS)</h4>
+                    <p><b>Unit:</b> mg/L</p>
+                    <p>TDS is an estimate of the total dissolved material in water, including dissolved salts and minerals.</p>
+                    <p><b>Why it matters:</b> High TDS can affect taste, scaling, corrosion and suitability for sensitive industrial or biological uses. TDS alone does not identify which substances are present.</p>
+                </article>
+                <article class="learn-card">
+                    <h4>pH</h4>
+                    <p><b>Unit:</b> pH units (dimensionless)</p>
+                    <p>pH indicates how acidic or alkaline water is. It is related to hydrogen-ion activity; in a simplified dilute-solution calculation, pH = −log₁₀[H⁺].</p>
+                    <p><b>Why it matters:</b> pH affects corrosion, scaling, chemical reactions and aquatic organisms. The current main input form does not measure initial pH; pH is used in custom target limits.</p>
+                </article>
+                <article class="learn-card">
+                    <h4>Temperature</h4>
+                    <p><b>Unit:</b> °C</p>
+                    <p>Temperature affects reaction rates, gas solubility, biological activity and the performance of some treatment processes.</p>
+                    <p><b>Why it matters:</b> Different applications operate at different temperatures. The current main input form does not ask for initial temperature; it is available as a custom target range.</p>
+                </article>
+                <article class="learn-card">
+                    <h4>Chlorine</h4>
+                    <p><b>Input in this project:</b> Present / Absent</p>
+                    <p>Chlorine is often used as a disinfectant to control microorganisms in water. Residual chlorine may be unwanted in some processes or sensitive applications.</p>
+                    <p><b>Why it matters:</b> The analyzer uses a qualitative selection, not a measured chlorine concentration in mg/L.</p>
+                </article>
+                <article class="learn-card">
+                    <h4>Heavy metals</h4>
+                    <p><b>Input in this project:</b> Traces / Present</p>
+                    <p>Metals such as lead, arsenic, cadmium and mercury can be harmful at sufficiently elevated concentrations. Their behaviour depends on chemical form and water conditions.</p>
+                    <p><b>Why it matters:</b> A laboratory test is needed to identify and quantify individual metals. The project's selection is only a simplified flag.</p>
+                </article>
+                <article class="learn-card">
+                    <h4>Chemical pollutants</h4>
+                    <p><b>Input in this project:</b> Present / Absent</p>
+                    <p>This broad category can include organic compounds, industrial chemicals, pesticides and other contaminants.</p>
+                    <p><b>Why it matters:</b> Different chemicals require different treatment methods. A single present/absent value cannot identify the pollutant or guarantee its removal.</p>
+                </article>
+                <article class="learn-card">
+                    <h4>Biological contaminants</h4>
+                    <p><b>Input in this project:</b> Present / Absent</p>
+                    <p>This category refers to microorganisms such as bacteria, viruses and protozoa that may create health risks.</p>
+                    <p><b>Why it matters:</b> Disinfection can reduce microbial risk, but its effectiveness depends on the organism, water clarity, dose and operating conditions.</p>
+                </article>
+                <article class="learn-card">
+                    <h4>Dissolved oxygen (DO) & biochemical oxygen demand (BOD)</h4>
+                    <p><b>Units in laboratory reporting:</b> mg/L</p>
+                    <p>DO is the oxygen dissolved in water. BOD estimates the oxygen used by microorganisms while breaking down biodegradable material under a defined test.</p>
+                    <p><b>Why it matters:</b> DO and BOD help describe aquatic and wastewater conditions. In this project they are represented by four qualitative categories, not measured values.</p>
+                </article>
+            </div>
+
+            <h4 class="learn-section-title">2. Treatment methods used by the recommendation engine</h4>
+            <p class="learn-intro">The following explanations cover the methods named in the current script. The analyzer selects methods using simplified rules based on input values and the selected target profile.</p>
+
+            <details>
+                <summary>Coagulation and flocculation</summary>
+                <p><b>Coagulation</b> involves adding a suitable coagulant so that fine suspended particles lose some of their stability. <b>Flocculation</b> gently mixes the water to help the destabilized particles join into larger flocs that can settle or be filtered.</p>
+                <p>These steps are commonly used when fine particles are too small to settle quickly on their own. Chemical selection and dose normally require jar testing and process control.</p>
+            </details>
+            <details>
+                <summary>Sedimentation</summary>
+                <p>Water is held or passed through a basin at a controlled flow so that heavier suspended particles or formed flocs can settle under gravity. Settling reduces the solids load on later filters.</p>
+            </details>
+            <details>
+                <summary>Sand and multimedia filtration</summary>
+                <p>Water passes through a porous bed that captures suspended particles. A multimedia filter uses layers of media with different properties to distribute particle capture through the bed. Filters need suitable operation and periodic cleaning or backwashing.</p>
+            </details>
+            <details>
+                <summary>Microfiltration and ultrafiltration</summary>
+                <p>These membrane processes use small pores to separate suspended particles and many microorganisms from water. Ultrafiltration generally has finer separation than microfiltration. Neither process should be assumed to remove dissolved salts reliably.</p>
+            </details>
+            <details>
+                <summary>Ion-exchange softening</summary>
+                <p>A cation-exchange resin exchanges calcium and magnesium ions for other ions, commonly sodium. This reduces hardness and helps control scale formation. The resin eventually needs regeneration or replacement.</p>
+            </details>
+            <details>
+                <summary>Lime-soda precipitation</summary>
+                <p>Lime and soda ash are used under controlled chemical conditions to convert some dissolved calcium and magnesium into less-soluble compounds. The resulting precipitates are separated by clarification and filtration.</p>
+            </details>
+            <details>
+                <summary>Nanofiltration and reverse osmosis (RO)</summary>
+                <p>Pressure pushes water through a selective membrane. Nanofiltration can reduce hardness and some dissolved substances; reverse osmosis generally removes a broader range of dissolved salts. Both processes produce a concentrated reject stream and require suitable pretreatment and operating controls.</p>
+            </details>
+            <details>
+                <summary>Deionization and electrodeionization</summary>
+                <p>Deionization uses ion-exchange materials to remove dissolved ions. Electrodeionization combines ion-exchange media and an electric field to continuously move ions through selective membranes. These methods are often used for high-purity water after membrane pretreatment.</p>
+            </details>
+            <details>
+                <summary>Activated carbon and chemical dechlorination</summary>
+                <p>Activated carbon can adsorb many organic compounds and can remove free chlorine under suitable conditions. Sodium bisulfite is a reducing agent that can chemically neutralize chlorine. Choice and dose depend on the actual water chemistry and process requirements.</p>
+            </details>
+            <details>
+                <summary>Specialized media for metals and chemical pollutants</summary>
+                <p>Activated alumina, iron-oxide-based media and other adsorbents can capture selected contaminants under suitable conditions. A solid carbon block with specialized media may reduce certain organic chemicals. No single media removes every metal or pollutant; the contaminant must first be identified.</p>
+            </details>
+            <details>
+                <summary>Ultraviolet (UV) disinfection</summary>
+                <p>UV light can inactivate many microorganisms by damaging their genetic material. UV does not remove dissolved salts or particles, and it does not leave a disinfectant residual in the water. Water clarity and correct equipment operation are important.</p>
+            </details>
+            <details>
+                <summary>Biological treatment and aeration</summary>
+                <p>Biological processes such as activated sludge and trickling filters use microorganisms to break down biodegradable pollutants. Aeration transfers oxygen into water and can support biological treatment or increase dissolved oxygen. Actual performance depends on loading, temperature, residence time and system design.</p>
+            </details>
+
+            <h4 class="learn-section-title">3. How to read the units</h4>
+            <div class="learn-table-wrap">
+                <table class="learn-table">
+                    <thead><tr><th>Unit</th><th>Meaning</th><th>Used for</th></tr></thead>
+                    <tbody>
+                        <tr><td>NTU</td><td>Nephelometric turbidity units</td><td>Turbidity</td></tr>
+                        <tr><td>mg/L</td><td>Milligrams per litre</td><td>TDS, DO, BOD and many measured chemical concentrations</td></tr>
+                        <tr><td>mg/L as CaCO₃</td><td>Milligrams per litre expressed as calcium carbonate equivalent</td><td>Water hardness and alkalinity reporting</td></tr>
+                        <tr><td>µS/cm</td><td>Microsiemens per centimetre</td><td>Electrical conductivity</td></tr>
+                        <tr><td>°C</td><td>Degrees Celsius</td><td>Temperature</td></tr>
+                        <tr><td>mol/L</td><td>Moles per litre</td><td>Ion concentration used by the pH calculator</td></tr>
+                        <tr><td>pH</td><td>Dimensionless logarithmic scale</td><td>Acidity / alkalinity</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="learn-section-title">4. How this project makes recommendations</h4>
+            <div class="learn-card">
+                <ol>
+                    <li>The user enters selected initial water-quality values and qualitative contaminant flags.</li>
+                    <li>The user chooses an application or enters custom target ranges.</li>
+                    <li>The script compares selected inputs with the target profile and applies its programmed decision rules.</li>
+                    <li>It displays the treatment methods associated with the conditions detected by those rules.</li>
+                </ol>
+                <p>The parameter calculators are separate utilities. Their results are not automatically transferred into the main treatment form.</p>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
+
+<script src="processInputs.js"></script>
+<script src="script.js"></script>
+<script src="calculators.js"></script>
+
+<script>
+    
+    //Show the error message on top, taking input the message and if it is error (by default error)
+    function showMessage(message, isError = true) {
+        const box = document.getElementById("app_message");
+        if (!box) { 
+            return;
+        }
+        box.textContent = message;
+        box.style.display = "block";
+        box.style.background = isError ? "#fff0ef" : "#eaf7ef";
+        box.style.borderColor = isError ? "#efc4c0" : "#b9dfc5";
+        box.style.color = isError ? "#8b2922" : "#245b38";
+        box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+    
+    //Clear the error box
+    function clearMessage() {
+        const box = document.getElementById("app_message");
+        box.textContent = ""; 
+        box.style.display = "none"; 
+
+    }
+    
+    //Validate the number input from the field, with id of field, the field label and min and max value
+    function readNumber(id, label, options = {}) {
+        const element = document.getElementById(id);
+        if (!element) {
+            throw new Error("The " + label + " field is unavailable.");
+        }
+        const raw = element.value.trim();
+        if (raw === ""){
+            throw new Error("Please enter " + label + ".");
+        }
+        const value = Number(raw);
+        if (!Number.isFinite(value)) { 
+            throw new Error(label + " must be a valid number.");
+        }
+        if (options.min !== undefined && value < options.min) {
+            throw new Error(label + " must be at least " + options.min + ".");
+        }
+        if (options.max !== undefined && value > options.max) {
+            throw new Error(label + " must not exceed " + options.max + ".");
+        }
+        return value;
+    }
+    
+    //Check if the low value is greater than high value taking input the values and label of values
+    function validateRange(low, high, label) {
+        if (low > high) {
+            throw new Error(label + ": minimum cannot be greater than maximum.");
+        }
+    }
+
+    //clearMessage();
+</script>

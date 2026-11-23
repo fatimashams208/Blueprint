@@ -1,0 +1,400 @@
+
+:root {
+  color-scheme: light;
+  --ink: #183247;
+  --muted: #617586;
+  --blue: #126b8a;
+  --blue-dark: #0c526d;
+  --aqua: #eaf6f8;
+  --line: #d8e5e9;
+  --surface: #ffffff;
+  --page: #f3f7f9;
+  --success: #eaf7ef;
+  --danger: #fff0ef;
+  --shadow: 0 8px 24px rgba(20, 54, 72, .06);
+}
+
+/* Universal resets */
+* { 
+  box-sizing: border-box; 
+  margin: 0;
+  padding: 0;
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  padding: 0;
+}
+
+/* Flexbox Navigation Header Layout */
+.Menubar {
+  display: flex; 
+  flex-direction: row;
+  align-items: center; 
+  justify-content: space-between; 
+  gap: 20px;
+  padding: 14px 24px;
+  background: #103f56; 
+  color: white; 
+  box-shadow: 0 3px 10px rgba(0,0,0,.1);
+}
+
+.menubar_heading { 
+  font-size: 19px; 
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: default; 
+}
+
+.menubar_options { 
+  display: flex; 
+  flex-wrap: wrap; 
+  align-items: center;
+  gap: 10px; 
+}
+
+/* Button & Interactive Element Foundations */
+.menubar_options_button, .treat_water_button, .calculator {
+  border: 0; 
+  border-radius: 6px; 
+  padding: 10px 16px; 
+  cursor: pointer;
+  font: inherit; 
+  font-weight: 600; 
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.menubar_options_button { 
+  background: rgba(255,255,255,.15); 
+  color: white; 
+}
+
+.menubar_options_button:hover { 
+  background: rgba(255,255,255,.25); 
+}
+
+.treat_water_button, .calculator { 
+  background: var(--blue); 
+  color: white; 
+}
+
+.treat_water_button:hover, .calculator:hover { 
+  background: var(--blue-dark); 
+}
+
+/* Main Container Component */
+.Main_Container { 
+  width: 80%;
+  max-width: 800px; 
+  margin: 24px auto 48px; 
+  
+}
+
+#div_treatWater, #div_calculateParameters, #div_learnmore {
+  background: var(--surface); 
+  border: 1px solid var(--line); 
+  border-radius: 12px;
+  padding: 24px; 
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+
+/* Typography elements */
+h3, h4, h5 { 
+  line-height: 1.3; 
+  margin-bottom: 12px;
+}
+h3 { font-size: 22px; }
+h4 { font-size: 18px; color: #103f56; }
+h5 { font-size: 15px; }
+
+p {
+  margin-bottom: 12px;
+}
+
+.treatWater_content_description, 
+#div_learnmore p, 
+#div_calculateParameters > p,
+.learn-intro { 
+  color: var(--muted); 
+}
+
+/* Adaptive Form Components */
+.form-section {
+  border: 1px solid var(--line); 
+  border-radius: 8px; 
+  padding: 16px;
+  margin: 16px 0; 
+  background: #fbfdfe;
+}
+
+.form-group { 
+  margin-bottom: 14px; 
+}
+
+label { 
+  display: block; 
+  font-weight: 600; 
+  margin-bottom: 6px; 
+  color: #29485b; 
+}
+
+input, select {
+  width: 100%; 
+  min-height: 40px; 
+  padding: 8px 12px; 
+  border: 1px solid #c8d8df;
+  border-radius: 6px; 
+  background: white; 
+  color: var(--ink); 
+  font: inherit;
+}
+
+input:focus, select:focus { 
+  outline: 2px solid var(--blue); 
+  border-color: var(--blue); 
+}
+
+/* Dynamic CSS Grid configuration for responsive form field pairing */
+.custom-range { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+  gap: 12px; 
+}
+
+#submit_input_output_parameters_form {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 6px;
+  background: #1769aa;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(23, 105, 170, .15);
+  transition: background 0.2s ease;
+}
+
+#submit_input_output_parameters_form:hover {
+  background: #10558d;
+}
+
+/* Calculator Utility Subpanels */
+.calculator_window {
+  margin-top: 12px; 
+  padding: 16px; 
+  border: 1px solid var(--line);
+  border-radius: 8px; 
+  background: #fbfdfe;
+}
+
+#div_hardness_calculator_multiple_salt_input input,
+#tds_calculator_display input, 
+#tds_calculator_display_no_salts input { 
+  margin-bottom: 12px; 
+}
+
+#turbidity_calc_output, #ph_calc_output, #tds_approx_result, #tds_salt_result { 
+  display: block; 
+  margin-top: 12px; 
+  font-weight: 700; 
+}
+
+/* Treatment output visualization boxes */
+.results-box {
+  margin-top: 20px; 
+  padding: 16px; 
+  border: 1px solid #b8dce4;
+  border-radius: 8px; 
+  background: var(--aqua);
+  display: none;
+}
+
+.results-list { 
+  padding-left: 20px; 
+}
+
+.results-list li { 
+  margin: 6px 0; 
+}
+
+/* Learn More Reference Section Tools */
+.learn-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+  gap: 14px; 
+  margin: 16px 0; 
+}
+
+.learn-card { 
+  background: #fff; 
+  border: 1px solid var(--line); 
+  border-radius: 8px; 
+  padding: 16px; 
+  box-shadow: 0 2px 6px rgba(20,45,70,.03); 
+}
+
+.learn-table-wrap { 
+  overflow-x: auto; 
+  margin: 14px 0; 
+}
+
+.learn-table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  background: white; 
+}
+
+.learn-table th, .learn-table td { 
+  padding: 10px 12px; 
+  border: 1px solid var(--line); 
+  text-align: left; 
+}
+
+.learn-table th { 
+  background: #edf5fb; 
+  color: #174b70; 
+}
+
+.learn-note { 
+  padding: 12px; 
+  border-left: 4px solid #d69b36; 
+  background: #fff8e9; 
+  border-radius: 4px; 
+  margin: 16px 0; 
+}
+
+#div_learnmore details { 
+  background: #fff; 
+  border: 1px solid var(--line); 
+  border-radius: 6px; 
+  padding: 12px; 
+  margin: 8px 0; 
+}
+
+#div_learnmore summary { 
+  cursor: pointer; 
+  font-weight: 700; 
+  color: #174b70; 
+}
+
+/* System Alerts */
+#app_message {
+  margin: 16px 0; 
+  padding: 12px; 
+  border-radius: 6px;
+  border: 1px solid #efc4c0; 
+  background: var(--danger); 
+  color: #8b2922;
+  display: none;
+}
+
+/* Focus rings for user accessibility */
+button:focus-visible, input:focus-visible, select:focus-visible { 
+  outline: 2px solid var(--blue); 
+  outline-offset: 2px; 
+}
+
+/* Global Media Query overrides for mobile and vertical configurations */
+@media (max-width: 768px) {
+  /* Force everything onto one single horizontal row */
+  .Menubar { 
+    flex-direction: row !important; 
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    padding: 10px 8px !important;
+    width: 100% !important;
+    flex-wrap: nowrap !important; /* Strictly blocks wrapping to the next line */
+  }
+  
+  /* Shrink title and keep it locked on the left side */
+  .menubar_heading {
+    font-size: 13px !important; /* Scaled down to fit on narrow devices */
+    white-space: nowrap !important; /* Locks text onto a single line */
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important; /* Prevents the buttons from crushing the text */
+  }
+
+  /* Keep all three buttons tightly in a single row on the right */
+  .menubar_options {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important; /* Forces buttons onto one line */
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 4px !important; 
+    width: auto !important;
+    margin: 0 !important;
+  }
+  
+  /* Compact buttons with minimal spacing to maximize horizontal space */
+  .menubar_options_button {
+    width: auto !important;
+    min-height: 32px !important;
+    padding: 4px 6px !important; /* Small padding so buttons fit side-by-side */
+    font-size: 10px !important; /* Micro font sizing optimized for 1-line mobile display */
+    text-align: center !important;
+    white-space: nowrap !important;
+    border-radius: 4px !important;
+  }
+
+  /* Page layout corrections below the header */
+  .Main_Container {
+    width: 94% !important;
+    margin-top: 14px !important;
+  }
+  
+  .form-section {
+    padding: 12px !important;
+  }
+
+  .calculator { 
+    width: 100% !important;
+    margin: 4px 0 !important;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Removes the double border lines */
+  font-family: sans-serif;
+  margin: 20px 0;
+}
+
+/* Style headers and data cells together */
+th, td {
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Light, subtle horizontal dividers */
+}
+
+/* Give the header a subtle background stretch */
+th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+/* Clean up the input text boxes inside cells */
+td input {
+  padding: 3px 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Bold the bottom total row */
+tr:last-child {
+  font-weight: bold;
+  background-color: #fafafa;
+}
+
